@@ -1,19 +1,25 @@
 # SmartOS (Windows launcher)
 
-1. Install Python 3.9+ (tick "Add to PATH") and VLC: https://www.videolan.org/vlc/
-2. Optional, embeds VLC inside the app: `pip install python-vlc`
-   (use the same 64/32-bit build for Python and VLC)
-3. Run: `pythonw smartos.py`  (or `python smartos.py`)
+TV-OS style launcher: Live TV (IPTV + VLC), YouTube TV and websites in an
+in-app browser with ad blocker, Shinchan TV (S1-S15 x E1-E52) with background
+stream extraction and in-app browser fallback, Settings with App Loader.
 
-Keys: arrows move, Enter opens/plays, Esc goes back, F11 fullscreen.
-Live TV: Left/Right = previous/next channel.
+## Run from source
+1. Python 3.10+ (64-bit) and VLC (64-bit): https://www.videolan.org/vlc/
+2. `pip install -r requirements.txt`
+3. `pythonw smartos.py`
 
-Settings: playlist path or URL (.m3u), VLC path, App Loader
-(add programs/websites; they show as tiles on Home), desktop shortcut.
+## Get the Windows build
+Open the **Actions** tab, pick the latest run, download `SmartOS-windows`,
+unzip, run `SmartOS/SmartOS.exe`. VLC must still be installed.
 
-Build a single .exe: `pip install pyinstaller` then
-`pyinstaller --onefile --noconsole smartos.py`
+## Keys
+Arrows move, Enter opens/plays, Esc back, F11 fullscreen, F video fullscreen,
+Live TV: Left/Right previous/next channel, Space pause.
 
-Shinchan TV: the site blocked automated access when I tried it, so the
-episode list could not be tested live. If "Fetch" fails, use "Open site",
-save the page (Ctrl+S, HTML only) and click "Load saved page".
+## Notes
+- Extra ad domains: one per line in `%APPDATA%\SmartOS\adblock_extra.txt`.
+- If a channel fails, the player shows the reason (HTTP status / unreachable).
+  Some streams need a Referer or User-Agent: set them in Settings, or add
+  `#EXTVLCOPT:http-referrer=...` lines to the playlist.
+- Shinchan limits (seasons, episodes per season, per-season overrides) are in Settings.
